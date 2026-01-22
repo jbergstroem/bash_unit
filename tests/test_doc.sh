@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 TEST_PATTERN='```test'
-OUTPUT_PATTERN='```output'
+if [[ "$(uname)" == "Darwin" ]]; then
+  OUTPUT_PATTERN='```output(-darwin)?'
+else
+  OUTPUT_PATTERN='```output(-linux)?'
+fi
 LANG=C.UTF-8
 unset LC_ALL LANGUAGE
 

@@ -671,19 +671,26 @@ This can be useful when one has tests that are dependent on system environment, 
 skip_if "uname | grep Darwin" linux
 skip_if "uname | grep Linux" darwin
 
-test_linux_proc_exists() {
+test_1_linux_proc_exists() {
   assert "ls /proc/" "there should exist /proc on Linux"
 }
-test_darwin_proc_does_not_exist() {
+test_2_darwin_proc_does_not_exist() {
   assert_fail "ls /proc/" "there should not exist /proc on Darwin"
 }
 ```
 
-will output, on a Linux system:
+will output on Linux:
 
-```output
-	Running test_darwin_proc_does_not_exist ... SKIPPED
-	Running test_linux_proc_exists ... SUCCESS
+```output-linux
+	Running test_1_linux_proc_exists ... SUCCESS
+	Running test_2_darwin_proc_does_not_exist ... SKIPPED
+```
+
+and on Darwin:
+
+```output-darwin
+	Running test_1_linux_proc_exists ... SKIPPED
+	Running test_2_darwin_proc_does_not_exist ... SUCCESS
 ```
 
 == *fake* function
